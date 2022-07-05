@@ -185,13 +185,13 @@
                         <div class="card-body" style="width: 50%;">
                             <form class="user" id="datosAlimento">
                                 <div class="form-group row">
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="number" class="form-control form-control-user" id="codigob" name="codigob"
-                                            placeholder="Codigo socio">
-                                    </div>
                                     <div class="col-sm-6">
                                         <input type="number" class="form-control form-control-user" id="cedulab" name="cedulab"
                                             placeholder="Cedula invitado">
+                                    </div>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="number" class="form-control form-control-user" id="codigob" name="codigob"
+                                            placeholder="Codigo socio">
                                     </div>
                                 </div>
                                 <div class="form-group">

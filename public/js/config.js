@@ -104,11 +104,9 @@ function presentacion(){
             url: URLD + "presentacionControl/presentaciong",
             data: $('#datosPresentacion').serialize(),
             success: function (data) {
-                console.log(data);
-                return;
                 var task = JSON.parse(data);
                 console.log(task);
-                if(task){
+                if(task[0]){
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -116,14 +114,14 @@ function presentacion(){
                         showConfirmButton: false,
                         timer: 2000
                     })
-                    /* setTimeout(function () {
+                    setTimeout(function () {
                         location.reload();
-                    }, 2000) */
+                    }, 2000)
                 }else{
                     Swal.fire({
                         icon: 'warning',
                         title: 'Oops...',
-                        text: 'El usuario no esta registrado',
+                        text: task[1],
                         confirmButtonColor: '#2a6db3'
                     })
                 }
@@ -157,16 +155,25 @@ function alimento(){
             success: function (data) {
                 var task = JSON.parse(data);
                 console.log(task);
-                Swal.fire({
-                    position: 'top-end',
-                    icon: 'success',
-                    title: 'Alimento/Bebida Registrada',
-                    showConfirmButton: false,
-                    timer: 2000
-                })
-                setTimeout(function () {
-                    location.reload();
-                }, 2000)
+                if(task[0]){
+                    Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Presentacion Registrada',
+                        showConfirmButton: false,
+                        timer: 2000
+                    })
+                    setTimeout(function () {
+                        location.reload();
+                    }, 2000)
+                }else{
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: task[1],
+                        confirmButtonColor: '#2a6db3'
+                    })
+                }
             },
             error: function (r) {
                 r.responseText;

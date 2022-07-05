@@ -24,14 +24,22 @@
             $dias = $_POST['diasi'];
             $tipo = $_POST['tipoi'];
 
-            $temp2 = $this->model->verificarUser(['cedula_invitado_pres'=>$cedula]);
-
-            if($temp='true'){
-                echo json_encode($temp2);
+            $temp2 = $this->model->verificarUser($cedula);
+            $temp3 = $this->model->verificarSocio($codigo);
+            if($temp2){
+                if(!$temp3){
+                    echo json_encode([false, 'El Socio no es valido']);
+                    return;
+                }else{
+                    $temp = $this->model->insertarPresentacion(['codigo_socio_pres'=>$codigo, 'cedula_invitado_pres'=>$cedula, 'fecha_pres_invitado'=>$fecha, 'num_dias_pres'=>$dias, 'tipo_pres'=>$tipo]);
+                    echo json_encode([true, $temp]);
+                    return;
+                }
             }else{
-                $temp = $this->model->insertarPresentacion(['codigo_socio_pres'=>$codigo, 'cedula_invitado_pres'=>$cedula, 'fecha_pres_invitado'=>$fecha, 'num_dias_pres'=>$dias, 'tipo_pres'=>$tipo]);
-                echo json_encode($temp);
+                echo json_encode([false, 'El invitano no esta registrado']);
+                return;
             }
+
         }
 
         function alimentog(){
@@ -41,8 +49,21 @@
             $dias = '';
             $tipo = $_POST['tipob'];
 
-            $temp = $this->model->insertarPresentacion(['codigo_socio_pres'=>$codigo, 'cedula_invitado_pres'=>$cedula, 'fecha_pres_invitado'=>$fecha, 'num_dias_pres'=>$dias, 'tipo_pres'=>$tipo]);
-            echo json_encode($temp);
+            $temp2 = $this->model->verificarUser($cedula);
+            $temp3 = $this->model->verificarSocio($codigo);
+            if($temp2){
+                if(!$temp3){
+                    echo json_encode([false, 'El Socio no es valido']);
+                    return;
+                }else{
+                    $temp = $this->model->insertarPresentacion(['codigo_socio_pres'=>$codigo, 'cedula_invitado_pres'=>$cedula, 'fecha_pres_invitado'=>$fecha, 'num_dias_pres'=>$dias, 'tipo_pres'=>$tipo]);
+                    echo json_encode([true,$temp]);
+                    return;
+                }
+            }else{
+                echo json_encode([false, 'El invitano no esta registrado']);
+                return;
+            }
         }
 
     }
