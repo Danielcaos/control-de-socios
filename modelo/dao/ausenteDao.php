@@ -1,6 +1,7 @@
 <?php
 
     require 'modelo/dto/ausenteDto.php';
+    require 'modelo/dto/socioDto.php';
 
     class ausenteDao extends Model{
 
@@ -34,6 +35,24 @@
                 return false;
             }
     
+        }
+
+        public function verificarAusente($codigo_socio){
+            try{
+                $statement = $this->db->connect()->prepare("SELECT * FROM socio WHERE codigo_socio = :codigo_socio");
+                $statement->execute(array(
+                    ':codigo_socio' => $codigo_socio
+                ));
+                $resultado = $statement->fetch();
+                if(is_array($resultado) && !empty($resultado)){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(PDOException $e){
+                //echo $e->getMessage();
+                return $e->getMessage();
+            }
         }
 
     }

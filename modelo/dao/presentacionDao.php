@@ -75,6 +75,27 @@
             }
         }
 
+        /* REVISAR */
+
+        public function verificarCiudad($cedula_invitado){
+            try{
+                $statement = $this->db->connect()->prepare("SELECT ciudad_invitado FROM invitado WHERE cedula_invitado = :cedula_invitado");
+                $statement->execute(array(
+                    ':$ciudad_invitado' => $ciudad_invitado
+                ));
+                echo json_encode($resultado);
+                $resultado = $statement->fetch();
+                if($resultado[1] == 'CUCUTA'){
+                    return true;
+                }else{
+                    return false;
+                }
+            }catch(PDOException $e){
+                //echo $e->getMessage();
+                return $e->getMessage();
+            }
+        }
+
     }
 
 ?>

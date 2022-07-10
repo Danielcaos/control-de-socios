@@ -25,8 +25,14 @@ class ausenteControl extends Controller{
         $dias = $_POST['dias'];
         $fecha = $_POST['fecha'];
 
-        $temp = $this->model->insertarAusente(['cod_socio_ausente'=>$codigo, 'dias_ausente'=>$dias, 'fecha_ingre_ausente'=>$fecha]);
-        echo json_encode($temp);
+        $temp2 = $this->model->verificarAusente($codigo);
+        if(!$temp2){
+            echo json_encode([false, 'El Socio no es valido']);
+            return;
+        }else{
+            $temp = $this->model->insertarAusente(['cod_socio_ausente'=>$codigo, 'dias_ausente'=>$dias, 'fecha_ingre_ausente'=>$fecha]);
+            echo json_encode([true, $temp]);
+        }
     }
 
 }
