@@ -75,20 +75,39 @@
             }
         }
 
-        /* REVISAR */
-
         public function verificarCiudad($cedula_invitado){
             try{
                 $statement = $this->db->connect()->prepare("SELECT ciudad_invitado FROM invitado WHERE cedula_invitado = :cedula_invitado");
                 $statement->execute(array(
-                    ':$ciudad_invitado' => $ciudad_invitado
+                    ':cedula_invitado' => $cedula_invitado
                 ));
-                echo json_encode($resultado);
                 $resultado = $statement->fetch();
-                if($resultado[1] == 'CUCUTA'){
+                
+                if($resultado[0] == 'CUCUTA'){
                     return true;
                 }else{
                     return false;
+                }
+            }catch(PDOException $e){
+                //echo $e->getMessage();
+                return $e->getMessage();
+            }
+        }
+
+        public function verificarIngresos($cedula_invitado, $tipo_pres, $fecha1, $fecha2){
+            try{
+                $statement = $this->db->connect()->prepare("SELECT * FROM invitado WHERE cedula_invitado = :cedula_invitado AND tipo_pres = :tipo_pres AND  fecha_pres_invitado BETWEEN $fecha1 AND $fecha2");
+                $statement->execute(array(
+                    ':cedula_invitado' => $cedula_invitado,
+                    ':tipo_pres' => $tipo_pres
+                ));
+                $resultado = $statement->num_rows();
+                echo json_encode($resultado);
+                return;
+                if($resultado[0] >= 2){
+                    return false;
+                }else{
+                    return true;
                 }
             }catch(PDOException $e){
                 //echo $e->getMessage();

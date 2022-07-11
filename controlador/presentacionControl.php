@@ -23,6 +23,13 @@
             $fecha = $_POST['fechai'];
             $dias = $_POST['diasi'];
             $tipo = $_POST['tipoi'];
+            $fecha2 = '2022-07-01';
+
+            $temp5 = $this->model->verificarIngresos($cedula, $tipo, $fecha, $fecha2);
+            echo json_encode($temp5);
+            return;
+
+            $temp4 = $this->model->verificarCiudad($cedula);
 
             $temp2 = $this->model->verificarUser($cedula);
             $temp3 = $this->model->verificarSocio($codigo);
