@@ -94,21 +94,18 @@
             }
         }
 
-        public function verificarIngresos($cedula_invitado, $tipo_pres, $fecha1, $fecha2){
+        public function verificarIngresos($cedula_invitado_pres, $tipo_pres, $fecha1, $fecha2){
             try{
-                $statement = $this->db->connect()->prepare("SELECT * FROM invitado WHERE cedula_invitado = :cedula_invitado AND tipo_pres = :tipo_pres AND  fecha_pres_invitado BETWEEN $fecha1 AND $fecha2");
+                $statement = $this->db->connect()->prepare("SELECT * FROM presentacion WHERE cedula_invitado_pres = :cedula_invitado_pres 
+                AND tipo_pres = :tipo_pres AND  fecha_pres_invitado BETWEEN :fecha1 AND :fecha2");
                 $statement->execute(array(
-                    ':cedula_invitado' => $cedula_invitado,
-                    ':tipo_pres' => $tipo_pres
+                    ':cedula_invitado_pres' => $cedula_invitado_pres,
+                    ':tipo_pres' => $tipo_pres,
+                    ':fecha1' => $fecha1,
+                    ':fecha2' => $fecha2
                 ));
-                $resultado = $statement->num_rows();
-                echo json_encode($resultado);
-                return;
-                if($resultado[0] >= 2){
-                    return false;
-                }else{
-                    return true;
-                }
+                $resultado = count($statement->fetchAll(PDO::FETCH_ASSOC));
+                return json_encode($resultado);
             }catch(PDOException $e){
                 //echo $e->getMessage();
                 return $e->getMessage();

@@ -104,8 +104,8 @@ function presentacion(){
             url: URLD + "presentacionControl/presentaciong",
             data: $('#datosPresentacion').serialize(),
             success: function (data) {
-                console.log(data);
-                return;
+                /* console.log(data);
+                return; */
                 var task = JSON.parse(data);
                 console.log(task);
                 if(task[0]){
@@ -121,7 +121,7 @@ function presentacion(){
                     }, 2000)
                 }else{
                     Swal.fire({
-                        icon: 'warning',
+                        icon: 'error',
                         title: 'Oops...',
                         text: task[1],
                         confirmButtonColor: '#2a6db3'

@@ -171,7 +171,7 @@
                                             placeholder="Dias">
                                     </div>
                                 </div>
-                                <input type="hidden" class="form-control form-control-user" id="tipoi" name="tipoi" placeholder="Dias" value="PRESENTACION">
+                                <input type="hidden" class="form-control form-control-user" id="tipoi" name="tipoi" value="PRESENTACION">
                                 <button type="button" onclick="return presentacion()" class="btn btn-primary btn-user btn-block">
                                     Guardar
                                 </button>
@@ -198,7 +198,7 @@
                                     <input type="date" class="form-control form-control-user" id="fechab" name="fechab"
                                         placeholder="Fecha">
                                 </div>
-                                <input type="hidden" class="form-control form-control-user" id="tipob" name="tipob" placeholder="Dias" value="ALIMENTO">
+                                <input type="hidden" class="form-control form-control-user" id="tipob" name="tipob" value="ALIMENTO">
                                 <button type="button" onclick="return alimento()" class="btn btn-primary btn-user btn-block">
                                     Guardar
                                 </button>
