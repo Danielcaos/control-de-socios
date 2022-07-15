@@ -55,6 +55,23 @@
             }
         }
 
+        public function verificarIngresos($cod_socio_ausente, $fecha1, $fecha2){
+            try{
+                $statement = $this->db->connect()->prepare("SELECT * FROM ausente WHERE cod_socio_ausente = :cod_socio_ausente 
+                AND  fecha_ingre_ausente BETWEEN :fecha1 AND :fecha2");
+                $statement->execute(array(
+                    ':cod_socio_ausente' => $cod_socio_ausente,
+                    ':fecha1' => $fecha1,
+                    ':fecha2' => $fecha2
+                ));
+                $resultado = count($statement->fetchAll(PDO::FETCH_ASSOC));
+                return json_encode($resultado);
+            }catch(PDOException $e){
+                //echo $e->getMessage();
+                return $e->getMessage();
+            }
+        }
+
     }
 
 ?>

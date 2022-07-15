@@ -27,6 +27,8 @@
             $fechaIni = '';
             $fechaFin = '';
             $pibot = '';
+            $diasCucuta = "2";
+            $diasExterior = "60";
 
             $hoy = getdate();
             if($hoy['mon'] == 1){
@@ -111,12 +113,12 @@
                     echo json_encode([false, 'El Socio no es valido']);
                     return;
                 }else{
-                    if($temp4 && $temp5 == "2"){
-                        echo json_encode([false, 'No quedan dias disponibles']);
+                    if($temp4 && ($temp5+$dias) > $diasCucuta){
+                        echo json_encode([false, 'El numero de dias es superior a los habiles. Dias restantes: '.($diasCucuta-$temp5)]);
                         return;
                     }else
-                    if(!$temp4 && $temp6 == "60"){
-                        echo json_encode([false, 'No quedan dias disponibles']);
+                    if(!$temp4 && ($temp6+$dias) > $diasExterior){
+                        echo json_encode([false, 'El numero de dias es superior a los habiles. Dias restantes: '.($diasExterior-$temp6)]);
                         return;
                     }else{
                         $diasv = '1';

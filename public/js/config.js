@@ -204,7 +204,8 @@ function ausente(){
             url: URLD + "ausenteControl/ausenteg",
             data: $('#datosAusente').serialize(),
             success: function (data) {
-                console.log(data);
+                /* console.log(data);
+                return; */
                 var task = JSON.parse(data);
                 console.log(task);
                 if(task[0]){
